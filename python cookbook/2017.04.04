@@ -1,0 +1,30 @@
+'''
+line = 'nobody:*:-2:-2:Unpricileged User:/var/empty:/usr/bin/false'
+uname, *field, homedir
+sh = line.split(':')
+print(uname)
+print(homedir)
+print(sh)
+# 用split()函数将字符串 line 分开，然后读取其中的数据，*field 表示剩余的部分
+
+record = ('ACME',50, 123, 45, (12,18,2012))
+name, *_,(*_,year) = record
+print(name)
+print(year)   
+# 为了将一些元素解压后丢掉，可以用一些不用的变量来代表它们或称为废弃名称。
+    
+def sum(items):
+    head,*tail = items
+    return head + sum(tail) if tail else head  # 迭代思想，如果tail不为空，
+# 则返回head + sum（tail）否则返回 head
+items = [1,2,3,4,5,6,7,8]
+sum(items)
+
+#保留有限历史记录
+from collections import deque
+def search (lines,pattern,history):
+    previous_lines = deque(maxlen = history)
+    for li in lines:
+        yield li ,previous_lines # yield 为迭代器  需要补一下这个知识点了
+    previous_lines.append(li)
+'''
