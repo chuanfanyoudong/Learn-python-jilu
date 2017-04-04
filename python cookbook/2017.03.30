@@ -1,0 +1,26 @@
+
+
+p = (4,5)
+x,y = p
+print(x,y)  #打印x，y的值
+data = ['ACME',50,91.1,(2012,12,21)]
+name, shares, price, date = data
+print(name,shares,price,date)   #全部打印各值
+s = 'Hello'
+a,b,c,d,e = s
+print(a,b,c,d,e )
+a,*middle,b = s  #用*middle来表示剩余变量，但解压出来一定是列表类型
+print(a,b)
+records =[('foo',1,3),('bar','hello'),('foo',3,4)]
+
+def do_foo(x,y):
+    print('foo',x,y)
+
+def do_bar(s):
+    print('bar',s)
+    
+for tag,*args in records:
+    if tag == 'foo':
+        do_foo(*args)
+    elif tag == 'bar':
+do_bar(*args)
