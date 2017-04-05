@@ -25,6 +25,6 @@ from collections import deque
 def search (lines,pattern,history):
     previous_lines = deque(maxlen = history)
     for li in lines:
-        yield li ,previous_lines # yield 为迭代器  需要补一下这个知识点了
+        yield li ,previous_lines # yield 为生成器  需要补一下这个知识点了 # for i in lines 其实就是一个迭代器 生成器会省空间 迭代器也会的
     previous_lines.append(li)
 '''
