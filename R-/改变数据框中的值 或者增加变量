@@ -1,0 +1,18 @@
+ leadship
+  manger     data country gender age q1 q2 q3 q4 q5
+1      1 10/24/08      US      M  32  5  4  5  5  5
+2      2 10/28/08      US      F  45  3  5  2  5  5
+3      3  10/1/08      UK      F  25  3  5  5  5  2
+4      4 10/12/08      UK      M  39  3  3  4 NA NA
+5      5   5/1/09      UK      F  NA  2  2  1  2  1
+> leadship$agecat[leadship$age > 75] <- "Elder"
+> leadship$agecat[leadship$age > 75] <- "Elder"#新增变量  将age大于75的化作Elder
+> leadship$agecat[leadship$age >= 55 & leadship$age <= 75] <- "Middle Aged"
+> leadship$agecat[leadship$age < 55] <- "Young"
+# 这里是为了增加一个新的变量 并且 将age大于75的化作Elder等等 也可以用更简洁的方法如：
+#创建一个变量 agecat  并对 agecat 根据 age  的值进行操作
+leadship <- within(leadship,{agecat <- NA
+                             agecat[age >= 55 & age <= 75] <- "Middle Aged" 
+                             agecat[age > 75] <- "Elder" 
+                             agecat[age < 55] <- "Young"})
+                     
