@@ -1,0 +1,32 @@
+"""
+def fab(max): 
+   n, a, b = 0, 0, 1 
+   while n < max: 
+       print(b) 
+       a, b = b, a + b 
+       n = n + 1
+fab(9)
+
+# for i in lines 其实就是一个迭代器
+#deque(maxlen = N) 构造一个固定大小的队列 大小为N
+from collections import deque
+q = deque (maxlen = 3)
+q.append(1)
+q.append(2)
+q.append(3)
+print(q)
+q.append(4)
+print(q)
+#由于最大只有三个元素 所以当4输入时 第一个输入的元素1会消失的
+
+from collections import deque
+q = deque ()
+q.append(1)
+q.append(2)
+q.append(3)
+print(q)
+q.appendleft(4)#可以在队列左边加上4
+#此处deque没有指定最大长度 所以可以随便加的
+q.pop()#可以取出最右边的元素
+q.popleft()#可以取出最左边的元素
+"""
