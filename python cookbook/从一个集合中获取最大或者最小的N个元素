@@ -1,0 +1,10 @@
+# 从一个集合中获取最大或者最小的N个元素
+# heapq 模块有两个函数： nlargest() 和 nsmallest() 可以完美解决这个问题。
+import heapq
+nums = [1,8,2,23,7,-4,18,23,42,37,2]
+print(heapq.nlargest(3,nums))#选出最大的三个数据
+print(heapq.nsmallest(3,nums))#选出最小的三个数据
+heapq.heapify(nums)
+print(nums)
+heapq.heappop(nums)#这个操作可以 弹出列表最小的元素
+print(sorted(nums)[-1])#打印出最大的元素
