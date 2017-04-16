@@ -1,1 +1,45 @@
+It have been said that” more data usually beats better algorithms,” which is to say that for some problems (such as recommending movies or music based on past preferences), however fiendish your algorithms, often they can be beaten simply by having more data (and a less sophisticated algorithm).
+
+有人说过：“更多的数据能够击败更好地算法”，这句话是要告诉我们，对一些问题来说（比如根据过去的喜好(past preferences) 推荐电影或者音乐）相比较优化（fiendish: adj. 恶魔似的，残忍的；极坏的）你的算法，拥有更多的数据（但是有个没那么复杂的算法）会更加有效。
+The good news is that big data is here. The bad news is that we are struggling to store and analyze it.
+好消息是数据就在那，坏消息是我们储存和分析数据却做的很挣扎。
+Data Storage and Analysis
+The problem is simple: although the storage capacities of hard drives have increased massively over the years, access speeds—the rate at which data can be read from drives—have not kept up. One typical drive from 1990 could store 1,370 MB of data and had a transfer speed of 4.4 MB/s, so you could read all the data from a full drive in around five minutes. Over 20 years later , 1-terabyte drives are the norm, but the transfer speed is around 100 MB/s, so it takes more than two and a half hours to read all the data off the disk
+
+数据分析与存储
+ 
+问题很简单：即使硬盘的存储容量已经有了巨大的增长，但是硬盘的存取速度（也就是数据从硬盘被读取的速度）没有跟上。1990年，一个典型的硬盘可以存储1370兆的容量，它的存取速度是4.4兆每秒，因此你可以用大约五分钟来读取这个硬盘的全部数据。20年后，1 T 容量的硬盘已经很常见了，但是存取速度大约有100兆每秒，因此读取硬盘中的全部数据将花费2.5个小时。
+
+This is a long time to read all data on a single drive—and writing is even slower. The obvious way to reduce the time is to read from multiple disks at once. Imagine if we had 100 drives, even holding one hundredth of the data. Working in parallel, we could read the data in under two minutes.
+
+读取一个硬盘上的全部数据要花费很长时间，并且读入数据甚至会更慢。减少这个时间的一个一种很明显的方式是从过个硬盘里读取数据。试想一下，如果我们有100个硬盘，每个硬盘读取百分之一的数据。并行工作，我们能够用少于两分钟的时间读完这些数据。
+
+Using only one hundredth of a disk may seem wasteful. But we can store 100 datasets, each of which is 1 terabyte, and provide shared access to them. We can imagine that the users of such a system would be happy to share access in return for shorter analysis times, and statistically, that their analysis jobs would be likely to be spread over time, so they wouldn’t interfere with each other too much.
+
+只用一个硬盘的百分之一的空间看起来是浪费的，但是我们同样也可以在一个硬盘里面存取100份数据啊，其中每一个是1TB, 并且实现共享硬盘的数据。我们可以想到作为更短分析时间的回报，这样一个系统的使用者一个十分乐于共享的，并且从统计学角度来说，他们的分析工作是在不同时间点完成的，，因此他们不会打扰别人太多。
+
+There’s more to being able to read and write data in parallel to or from multiple disks, though.
+
+
+虽然如此， 但是对多个硬盘的数据并行进行读写，还有更多问题要解决。
+
+The first problem to solve is hardware failure: as soon as you start using many pieces of hardware, the chance that one will fail is fairly high. A common way of avoiding data loss is through replication: redundant copies of the data are kept by the system so that in the event of failure, there is another copy available. This is how RAID works, for instance, although Hadoop’s filesystem, the Hadoop Distributed Filesystem(HDFS), takes a slightly different approach, as you shall see later.
+
+首先要解决的是硬件故障问题（hardware failure）：当你用很多片硬盘时，有硬盘故障的改了吧会特别高。一个普遍的避免数据损失的方法是复制（replication）：系统保存数据的备份，在故障出现的时候会有另一个数据备份存在。RAID就是这么工作的，比如说：Hadoop的文件系统（HDFS），是属于这一类，不过采用的方法略有不同，你将会稍后看到。
+
+The second problem is that most analysis tasks need to be able to combine the data in some way, and data read from one disk may need to be combined with data from any of the other 99 disks. Various distributed systems allow data to be combined from multiple sources, but doing this correctly is notoriously challenging. Mapreduce provides a programming model that abstracts the problem from disk reads and writes, transforming it into a computation over sets of keys and values. We look at the details of this model in later chapters, but the important points for the present discussion is that there are two parts to the computation—the map and the reduce—and it’s the interface between the two where the “mixing” occurs. Like HDFS, MapReduce has built-in reliability.
+
+第二个问题是大多数的分析任务需要将数据结合起来，并且从一个硬盘中读取的数据可能需要和其他99个硬盘中的数据相结合。各种各样的分布系统使得不同来源的数据结合起来，但是实现这些很明显很有挑战性但保证其正确性具有很大的挑战。（notoriously：众所周知地；声名狼藉地；恶名昭彰地）Mapreduce 提供了一种程序化的模型，这个模型使得问题从读写硬盘中抽象出来，并将其转化为一个数据集（由键值对组成）的计算。我们将在稍后的章节里探究这个模型的细节，但是当前讨论的重要观点是数据集的计算有两部分—Map和Reduce—并且在这两个问题的交集会有两部分的混合出现而且只有这两部分提供对外的接口。就像HDFS，Mapreduce 已经成为现实。Mapreduce 也有很高的可靠性。
+
+In a nutshell, this is what Hadoop provides: a reliable, scalable platform for storage and analysis. What’s more, because it runs on commodity hardware and is open source, Hadoop id affordable.
+
+简而言之，Hadoop是提供一个可靠地有一定规模的平台来存储和分析。更重要的是，因为他在商用硬件上运行并且它是开源的，所以Hadoop是很有前途的。
+
+Querying All Your Data
+The approach taken by MapReduce may seem like a brute-force approach. The premise is that the entire dataset –or at least a good portion of it—can be processed for each query. But this is its power. MapReduce is a batch query processor, and the ability to run an ad hoc query against your whole dataset and get the result in a reasonable time is transformative. It changes the way you think about data and unlocks data that was preciously archived in tape or disk. It gives people the opportunity to innovate with data. Questions that took too long to get answered before can now be answered, which in turn leads to new questions and new insights.
+
+查询你的所有数据
+MapReduce 采取的查询方式看起来像是一种蛮力（brute-force）的方式。一个前提是每一个查询操作都处理了全部或者大部分的数据组。但是这就是他的强大之处。MapReduce 是一种批处理查询器，并且有在合理的时间内处理整个数据集的动态查询的能力。它改变了人们对数据的思考方式，并且解锁了存档于磁带或者硬盘中的数据。它给了人们改变改变数据的机会。以前需要很久才能被回答的问题现在可以立刻会被回答，最后导致了新的观点和问题。
+
+For example, Mailtrust, Rackspace’s mail division, used Hadoop for processing email logs. One ad hoc query they wrote was to find the g
 
