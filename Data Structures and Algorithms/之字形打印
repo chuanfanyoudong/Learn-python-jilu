@@ -17,6 +17,16 @@ class Printer:
             i += 1
         return result
         
+ class Printer:
+    def printMatrix(self, mat, n, m):
+        # write code here
+        retMat = []
+        for i in range(0,n):
+            if i%2 != 0:
+                mat[i].reverse()
+            retMat += mat[i]  # 这里用了两个列表相加  是个好的点  我的思路也是这样的 只不过没写出来
+        return retMat
+    
 
 对于一个矩阵，请设计一个算法，将元素按“之”字形打印。具体见样例。
 
