@@ -9,7 +9,7 @@ class Printer:
                 while j<m:
                     result.append(mat[i][j])
                     j+=1
-            if i%2==1:
+            if i%2==1:#此处也可以先用 mat[i].reverse() 翻转列表 然后用j = 0 ，while j<m: result.append(mat[i][j])    j+=1
                 j = m - 1
                 while j>=0:
                     result.append(mat[i][j])
